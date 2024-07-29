@@ -52,13 +52,13 @@ li {
     padding: 10px;
     margin-bottom: 5px;
     border-radius: 5px;
-    text-align: left;
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    justify-content: space-between;
+    position: relative;
 }
 
-li.completed {
+li.completed .task-text {
     text-decoration: line-through;
     color: grey;
 }
@@ -70,8 +70,25 @@ li.completed {
     border-radius: 5px;
     cursor: pointer;
     padding: 5px 10px;
+    margin-left: 10px;
 }
 
 .delete-button:hover {
     background-color: darkred;
+}
+
+.checkbox {
+    margin-right: 10px;
+}
+
+.task-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.task-text {
+    flex-grow: 1;
+    text-align: center;
 }
