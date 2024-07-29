@@ -53,4 +53,25 @@ li {
     margin-bottom: 5px;
     border-radius: 5px;
     text-align: left;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+li.completed {
+    text-decoration: line-through;
+    color: grey;
+}
+
+.delete-button {
+    background-color: red;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 5px 10px;
+}
+
+.delete-button:hover {
+    background-color: darkred;
 }
