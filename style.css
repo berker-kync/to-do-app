@@ -1,28 +1,25 @@
 body {
-    font-family: Arial, sans-serif;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: #f0f0f0;
+    font-family: "Roboto", sans-serif;
+    background-color: #f5f5f5;
     margin: 0;
 }
 
 .container {
-    background-color: white;
+    max-width: 500px;
+    margin: 20px auto;
     padding: 20px;
     border-radius: 10px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 300px;
-    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
 }
 
 h1 {
+    text-align: center;
     margin-bottom: 20px;
 }
 
-input {
-    width: calc(100% - 22px);
+input, select {
+    width: 100%;
     padding: 10px;
     margin-bottom: 10px;
     border: 1px solid #ccc;
@@ -53,13 +50,44 @@ li {
     margin-bottom: 5px;
     border-radius: 5px;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
-    position: relative;
+    align-items: center; 
+    justify-content: space-between; 
+    position: relative; 
 }
 
 li.completed .task-text {
     text-decoration: line-through;
+    color: grey;
+}
+
+.checkbox-wrapper {
+    position: absolute; 
+    left: 10px; 
+    top: 50%; 
+    transform: translateY(-50%); 
+}
+
+.checkbox {
+    margin: 0;
+}
+
+.task-container {
+    display: flex;
+    align-items: center; 
+    justify-content: flex-start; 
+    width: 100%;
+    position: relative; 
+}
+
+.task-text {
+    margin-left: 40px;
+    flex-grow: 1; 
+    text-align: left; 
+}
+
+.priority {
+    font-size: 0.8em;
+    margin-right: 10px;
     color: grey;
 }
 
@@ -70,25 +98,25 @@ li.completed .task-text {
     border-radius: 5px;
     cursor: pointer;
     padding: 5px 10px;
-    margin-left: 10px;
-}
+    margin-left: 10px; 
 
 .delete-button:hover {
     background-color: darkred;
 }
 
-.checkbox {
-    margin-right: 10px;
-}
-
-.task-container {
+.filter-container {
+    margin-bottom: 10px;
     display: flex;
-    align-items: center;
     justify-content: center;
-    width: 100%;
 }
 
-.task-text {
-    flex-grow: 1;
-    text-align: center;
+li.completed .task-text {
+    text-decoration: line-through;
+    color: grey;
+}
+
+
+.checkbox-checked {
+    background-color: #007BFF;
+    color: white;
 }
