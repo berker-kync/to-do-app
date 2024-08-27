@@ -3,6 +3,8 @@ document.getElementById('addTaskButton').addEventListener('click', function() {
     const taskText = taskInput.value.trim();
     const prioritySelect = document.getElementById('prioritySelect');
     const taskPriority = prioritySelect.value;
+    const dueDateInput = document.getElementById('dueDateInput');
+    const dueDate = dueDateInput.value;
 
     if (taskText !== '') {
         const taskList = document.getElementById('taskList');
@@ -19,6 +21,7 @@ document.getElementById('addTaskButton').addEventListener('click', function() {
             task.completed = checkbox.checked;
             listItem.dataset.task = JSON.stringify(task);
             listItem.classList.toggle('completed', task.completed);
+            listItem.classList.toggle('checkbox-checked', task.completed);
             filterTasks();
         });
 
@@ -38,6 +41,10 @@ document.getElementById('addTaskButton').addEventListener('click', function() {
         prioritySpan.classList.add('priority');
         prioritySpan.textContent = `[${taskPriority}]`;
 
+        const dueDateSpan = document.createElement('span');
+        dueDateSpan.classList.add('due-date');
+        dueDateSpan.textContent = `Due: ${dueDate}`;
+
         const deleteButton = document.createElement('button');
         deleteButton.textContent = 'Delete';
         deleteButton.classList.add('delete-button');
@@ -51,15 +58,17 @@ document.getElementById('addTaskButton').addEventListener('click', function() {
         taskContainer.appendChild(checkboxWrapper);
         taskContainer.appendChild(taskSpan);
         taskContainer.appendChild(prioritySpan);
+        taskContainer.appendChild(dueDateSpan);
 
         listItem.appendChild(taskContainer);
         listItem.appendChild(deleteButton);
         listItem.dataset.priority = taskPriority;
 
-        
+
         const task = {
             text: taskText,
             priority: taskPriority,
+            dueDate: dueDate,
             completed: false
         };
         listItem.dataset.task = JSON.stringify(task);
@@ -70,33 +79,25 @@ document.getElementById('addTaskButton').addEventListener('click', function() {
     }
 });
 
-document.getElementById('filterAll').addEventListener('click', function() {
-    filterTasks('all');
-});
-document.getElementById('filterCompleted').addEventListener('click', function() {
-    filterTasks('completed');
-});
-document.getElementById('filterIncomplete').addEventListener('click', function() {
-    filterTasks('incomplete');
-});
+document.getElementById('filterSelect').addEventListener('change', filterTasks);
 
-function filterTasks(filter) {
+function filterTasks() {
+    const filter = document.getElementById('filterSelect').value;
     const taskList = document.getElementById('taskList');
     const tasks = Array.from(taskList.children);
 
     tasks.forEach(taskElement => {
         const task = JSON.parse(taskElement.dataset.task);
+        taskElement.style.display = 'none';
 
-        switch (filter) {
-            case 'completed':
-                taskElement.style.display = task.completed ? 'block' : 'none';
-                break;
-            case 'incomplete':
-                taskElement.style.display = task.completed ? 'none' : 'block';
-                break;
-            default:
-                taskElement.style.display = 'block';
-                break;
+        if (filter === 'all') {
+            taskElement.style.display = 'block';
+        } else if (filter === 'completed' && task.completed) {
+            taskElement.style.display = 'block';
+        } else if (filter === 'incomplete' && !task.completed) {
+            taskElement.style.display = 'block';
+        } else if (filter === 'due' && task.dueDate < new Date().toISOString()) {
+            taskElement.style.display = 'block';
         }
     });
 }

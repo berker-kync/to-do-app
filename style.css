@@ -120,3 +120,11 @@ li.completed .task-text {
     background-color: #007BFF;
     color: white;
 }
+
+input[type="date"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
