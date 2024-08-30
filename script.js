@@ -25,6 +25,21 @@ document.getElementById('addTaskButton').addEventListener('click', function() {
             filterTasks();
         });
 
+        document.getElementById('markAllComplete').addEventListener('click', function() {
+            const taskList = document.getElementById('taskList');
+            const tasks = Array.from(taskList.children);
+        
+            tasks.forEach(taskElement => {
+                const task = JSON.parse(taskElement.dataset.task);
+                task.completed = true;
+                taskElement.dataset.task = JSON.stringify(task);
+                taskElement.classList.toggle('completed', true);
+                taskElement.classList.toggle('checkbox-checked', true);
+            });
+        
+            filterTasks();
+        });
+
         checkboxWrapper.appendChild(checkbox);
 
         const taskSpan = document.createElement('span');
@@ -101,3 +116,4 @@ function filterTasks() {
         }
     });
 }
+
